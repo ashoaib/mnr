@@ -1,5 +1,17 @@
 @import "reset";
 
+
+/*
+ * VARIABLES
+ */
+$_maroon: #941547;
+$_cream: #fae4ad;
+$angle_margin: 10px;
+
+
+/*
+ * MIXINS
+ */
 @mixin abs-center($w, $h) {
 	width: $w;
 	height: $h;
@@ -7,8 +19,29 @@
 	left: (100% - $w) / 2;
 }
 
+@mixin perspective($distance) {
+	-webkit-perspective: $distance;
+	-moz-perspective: $distance;
+	-o-perspective: $distance;
+	-ms-perspective: $distance;
+	perspective: $distance;
+}
+
+@mixin animation($_time) {
+	-o-transition: all $_time ease-in-out;
+	-ms-transition: all $_time ease-in-out;
+	-moz-transition: all $_time ease-in-out;
+	-webkit-transition: all $_time ease-in-out;
+	transition: all $_time ease-in-out;
+}
+
+
+/*
+ * CSS
+ */
 html {
 	background: url('../assets/img/wood.jpg') repeat;
+	color: $_maroon;
 }
 
 #container {
@@ -21,9 +54,113 @@ html {
 }
 
 #card {
-	background: white;
-	width: 90%;
-	height: 90%;
 	position: relative;
 	@include abs-center(80%, 90%);
+	@include perspective(2000px);
+}
+
+.card {
+	background: $_cream;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	box-shadow: 0px 0px 10px 2px #000000;
+	
+	-webkit-transform-style: preserve-3d;
+	-moz-transform-style: preserve-3d;
+	-ms-transform-style: preserve-3d;
+	-o-transform-style: preserve-3d;
+	transform-style: preserve-3d;
+	
+	-webkit-backface-visibility: hidden;
+	-moz-backface-visibility: hidden;
+	-ms-backface-visibility: hidden;
+	-o-backface-visibility: hidden;
+	backface-visibility: hidden;
+	
+	/*@include animation(1s);*/
+}
+
+.front {
+	z-index: 900;
+	box-shadow: 0px 0px 100px 0px #000000;
+	-webkit-transform: rotateX(0deg);
+	-moz-transform: rotateX(0deg);
+	-ms-transform: rotateX(0deg);
+	-o-transform: rotateX(0deg);
+	transform: rotateX(0deg);
+}
+
+.back {
+	z-index: 800;
+	box-shadow: 0px 0px 100px 0px #000000;
+	-webkit-transform: rotateX(-180deg);
+	-moz-transform: rotateX(-180deg);
+	-ms-transform: rotateX(-180deg);
+	-o-transform: rotateX(-180deg);
+	transform: rotateX(-180deg);
+}
+
+.flip {
+	.front {
+		z-index: 800;
+		-webkit-transform: rotateX(180deg);
+		-moz-transform: rotateX(180deg);
+		-ms-transform: rotateX(180deg);
+		-o-transform: rotateX(180deg);
+		transform: rotateX(180deg);
+	}
+	
+	.back {
+		z-index: 900;
+		-webkit-transform: rotateX(0deg);
+		-moz-transform: rotateX(0deg);
+		-ms-transform: rotateX(0deg);
+		-o-transform: rotateX(0deg);
+		transform: rotateX(0deg);
+	}
+}
+
+.angle {
+	background: url('../assets/img/sprite.png') no-repeat;
+	width: 350px;
+	height: 350px;
+	position: absolute;
+}
+
+.angle.q1 {
+	background-position: 0px 0px;
+	top: $angle_margin;
+	left: $angle_margin;
+}
+
+.angle.q2 {
+	background-position: -360px 0px;
+	top: $angle_margin;
+	right: $angle_margin;
+}
+
+.angle.q3 {
+	background-position: 0px -360px;
+	bottom: $angle_margin;
+	left: $angle_margin;
+}
+
+.angle.q4 {
+	background-position: -360px -360px;
+	bottom: $angle_margin;
+	right: $angle_margin;
+}
+
+h1 {
+	display: block;
+	font-family: 'Monsieur La Doulaise', cursive;
+	font-size: 80px;
+}
+
+#title {
+	position: absolute;
+	top: 40%;
 }
