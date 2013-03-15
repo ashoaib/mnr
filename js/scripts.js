@@ -11,10 +11,12 @@ var ce = {
 	},
 	
 	watch: function() {
+		ce.removeTransition();
 		$(window).on('mousemove', ce.onMouseMove);
 	},
 	
 	unwatch: function() {
+		ce.addTransition();
 		$(window).off('mousemove');
 	},
 	
@@ -22,9 +24,25 @@ var ce = {
 		var widthRatio = (e.pageX - ce.halfWidth) / ce.halfWidth;
 		var heightRatio = (e.pageY - ce.halfHeight) / ce.halfHeight;
 		ce.target.css('-webkit-transform', 'rotateX(' + heightRatio * ce.rotThreshold * -1 + 'deg) rotateY(' + widthRatio * ce.rotThreshold + 'deg)');
+	},
+	
+	removeTransition: function() {
+		$('.card').removeClass('transition');
+	},
+	
+	addTransition: function() {
+		$('.card').addClass('transition');
 	}
 };
 
 $(function() {
 	//ce.init($('#card .front'));
+	$('#reverse').click(function() {
+		//ce.unwatch();
+		$('#card').addClass('flip');
+	});
+	$('.back').click(function() {
+		//ce.watch();
+		$('#card').removeClass('flip');
+	});
 });

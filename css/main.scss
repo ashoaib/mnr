@@ -28,11 +28,17 @@ $angle_margin: 10px;
 }
 
 @mixin animation($_time) {
-	-o-transition: all $_time ease-in-out;
-	-ms-transition: all $_time ease-in-out;
-	-moz-transition: all $_time ease-in-out;
-	-webkit-transition: all $_time ease-in-out;
-	transition: all $_time ease-in-out;
+	-o-transition: all $_time cubic-bezier(0.215, 0.610, 0.355, 1.000);
+	-ms-transition: all $_time cubic-bezier(0.215, 0.610, 0.355, 1.000);
+	-moz-transition: all $_time cubic-bezier(0.215, 0.610, 0.355, 1.000);
+	-webkit-transition: all $_time cubic-bezier(0.215, 0.610, 0.355, 1.000);
+	transition: all $_time cubic-bezier(0.215, 0.610, 0.355, 1.000);
+	
+	-webkit-transition-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+	-moz-transition-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+	-ms-transition-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+	-o-transition-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000); 
+	transition-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
 }
 
 
@@ -41,6 +47,7 @@ $angle_margin: 10px;
  */
 html {
 	background: url('../assets/img/wood.jpg') repeat;
+	font-family: 'Buenard', serif;
 	color: $_maroon;
 }
 
@@ -57,6 +64,10 @@ html {
 	position: relative;
 	@include abs-center(80%, 90%);
 	@include perspective(2000px);
+}
+
+.transition {
+	@include animation(1s);
 }
 
 .card {
@@ -80,7 +91,7 @@ html {
 	-o-backface-visibility: hidden;
 	backface-visibility: hidden;
 	
-	/*@include animation(1s);*/
+	@include animation(2s);
 }
 
 .front {
@@ -156,11 +167,33 @@ html {
 
 h1 {
 	display: block;
-	font-family: 'Monsieur La Doulaise', cursive;
-	font-size: 80px;
+	width: 100%;
+	text-align: center;
+	font-family: "penna-connected", cursive;
+	font-size: 100px;
 }
 
 #title {
 	position: absolute;
-	top: 40%;
+	top: 45%;
+}
+
+.front-message {
+	font-size: 30px;
+	width: 100%;
+	position: absolute;
+	text-align: center;
+}
+
+#invited {
+	top: 150px;
+}
+
+#reverse {
+	bottom: 150px;
+	cursor: pointer;
+	
+	span {
+		border-bottom: 1px dotted $_maroon;
+	}
 }
