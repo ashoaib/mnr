@@ -1,62 +1,67 @@
-var ce = {
-	rotThreshold: 5,
-	
-	init: function(target) {
-		var _window = $(window);
-		ce._window = _window;
-		ce.halfHeight = _window.height() / 2;
-		ce.halfWidth = _window.width() / 2;
-		ce.target = target;
-		ce.watch();
+/*
+ * CONSTANTS
+ */
+var MOBILE_WIDTH = 640;
+
+var card = {
+	init: function() {
+		card.listeners = {};
+		card.card = $('#card');
+		card.front = $('#card .front');
+		card.back = $('#card .back');
+		card.links = $('nav li');
+		
+		if ($(window).width() > MOBILE_WIDTH) {
+			card.center();
+			card.addListener(window, 'resize', card.center);
+		}
+		
+		card.addListener('#reverse', 'click', card.showReverse);
+		card.addListener('nav li', 'click', card.setNav);
 	},
 	
-	watch: function() {
-		ce.removeTransition();
-		$(window).on('mousemove', ce.onMouseMove);
+	showReverse: function() {
+		card.card.addClass('flip');
 	},
 	
-	unwatch: function() {
-		ce.addTransition();
-		$(window).off('mousemove');
+	center: function() {
+		var padding = ($(window).height() - card.card.height()) / 2;
+	
+		if (padding > 0) {
+			$('#container').css('padding-top', padding + 'px');
+		}
 	},
 	
-	onMouseMove: function(e) {
-		var widthRatio = (e.pageX - ce.halfWidth) / ce.halfWidth;
-		var heightRatio = (e.pageY - ce.halfHeight) / ce.halfHeight;
-		ce.target.css('-webkit-transform', 'rotateX(' + heightRatio * ce.rotThreshold * -1 + 'deg) rotateY(' + widthRatio * ce.rotThreshold + 'deg)');
+	setNav: function(e) {
+		card.links.removeClass('active');
+		$(this).addClass('active');
 	},
 	
-	removeTransition: function() {
-		$('.card').removeClass('transition');
+	addListener: function(object, eventType, func) {
+		$(object).on(eventType, func);
+		
+		if (typeof card.listeners[object] == 'undefined') {
+			card.listeners[object] = [eventType, func];
+		}
 	},
 	
-	addTransition: function() {
-		$('.card').addClass('transition');
+	removeListener: function(object, eventType) {
+		$(object).off(eventType);
+	},
+	
+	addAllListeners: function() {
+		for (o in card.listeners) {
+			$(o).on(card.listeners[o][0], card.listeners[o][1]);
+		}
+	},
+	
+	removeAllListeners: function() {
+		for (o in card.listeners) {
+			$(o).off(card.listeners[o][0]);
+		}
 	}
 };
 
-function centerCard() {
-	var padding = ($(window).height() - $('#card').height()) / 2;
-	
-	if (padding > 0) {
-		$('#container').css('padding-top', padding + 'px');
-	}
-}
-
-function setNav(e) {
-	$('nav li').removeClass('active');
-	$(this).addClass('active');
-}
-
 $(function() {
-	centerCard();
-	$(window).on('resize', centerCard);
-	$('#reverse').click(function() {
-		$('#card').addClass('flip');
-	});
-	// $('.back').click(function() {
-		// $('#card').removeClass('flip');
-	// });
-	
-	$('nav li').click(setNav);
+	card.init();
 });
