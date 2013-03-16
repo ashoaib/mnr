@@ -43,13 +43,20 @@ function centerCard() {
 	}
 }
 
+function setNav(e) {
+	$('nav li').removeClass('active');
+	$(this).addClass('active');
+}
+
 $(function() {
 	centerCard();
 	$(window).on('resize', centerCard);
 	$('#reverse').click(function() {
 		$('#card').addClass('flip');
 	});
-	$('.back').click(function() {
-		$('#card').removeClass('flip');
-	});
+	// $('.back').click(function() {
+		// $('#card').removeClass('flip');
+	// });
+	
+	$('nav li').click(setNav);
 });

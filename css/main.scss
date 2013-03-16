@@ -169,12 +169,16 @@ html {
 	right: $angle_margin;
 }
 
-h1 {
+h1, h2, header {
 	display: block;
 	width: 100%;
 	text-align: center;
 	font-family: "Penna", "penna-connected", cursive;
 	font-size: 115px;
+}
+
+header {
+	font-size: 58px;
 }
 
 #title {
@@ -218,4 +222,56 @@ h1 {
 .twiddle-bottom {
 	top: 445px;
 	background-position: -54px -899px;
+}
+
+.angle-back {
+	width: 201px;
+	height: 201px;
+}
+
+.angle-back.q1 {
+	background-position: -18px -1035px;
+}
+
+.angle-back.q2 {
+	background-position: -250px -1035px;
+}
+
+.angle-back.q3 {
+	background-position: -18px -1270px;
+}
+
+.angle-back.q4 {
+	background-position: -250px -1270px;
+}
+
+header {
+	margin-top: 30px;
+}
+
+#divider {
+	width: 266px;
+	height: 50px;
+	margin: 15px auto 15px auto;
+	background: url('../assets/img/sprite.png') no-repeat;
+	background-position: -522px -774px;
+}
+
+nav {
+	font-size: 32px;
+	text-align: center;
+	
+	li {
+		margin: 0 5px;
+		display: inline-block;
+		cursor: pointer;
+		padding: 10px;
+		border-radius: 10px;
+		@include animation(0.25s);
+	}
+	
+	li.active {
+		color: $_cream;
+		background-color: $_maroon;
+	}
 }
