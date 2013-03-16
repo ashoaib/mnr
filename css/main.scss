@@ -6,7 +6,10 @@
  */
 $_maroon: #941547;
 $_cream: #fae4ad;
+
 $angle_margin: 10px;
+
+$sprite: '../assets/img/sprite-flat.png';
 
 
 /*
@@ -139,7 +142,7 @@ html {
 }
 
 .angle {
-	background: url('../assets/img/sprite.png') no-repeat;
+	background: url($sprite) no-repeat;
 	width: 315px;
 	height: 315px;
 	position: absolute;
@@ -207,7 +210,7 @@ header {
 }
 
 .twiddle {
-	background: url('../assets/img/sprite.png') no-repeat;
+	background: url($sprite) no-repeat;
 	height: 92px;
 	width: 430px;
 	position: absolute;
@@ -253,7 +256,7 @@ header {
 	width: 266px;
 	height: 50px;
 	margin: 15px auto 15px auto;
-	background: url('../assets/img/sprite.png') no-repeat;
+	background: url($sprite) no-repeat;
 	background-position: -522px -774px;
 }
 
