@@ -16,8 +16,13 @@ var card = {
 			card.addListener(window, 'resize', card.center);
 		}
 		
-		card.addListener('#reverse', 'click', card.showReverse);
+		card.addListener('header span', 'click', card.showFront);
+		card.addListener('#reverse span', 'click', card.showReverse);
 		card.addListener('nav li', 'click', card.setNav);
+	},
+	
+	showFront: function() {
+		card.card.removeClass('flip');
 	},
 	
 	showReverse: function() {

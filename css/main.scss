@@ -183,6 +183,10 @@ h1, h2, header {
 
 header {
 	font-size: 58px;
+	
+	span {
+		cursor: pointer;
+	}
 }
 
 #title {
@@ -203,10 +207,10 @@ header {
 
 #reverse {
 	bottom: 105px;
-	cursor: pointer;
 	
 	span {
 		border-bottom: 1px dotted $_maroon;
+		cursor: pointer;
 	}
 }
 
