@@ -35,14 +35,21 @@ var ce = {
 	}
 };
 
+function centerCard() {
+	var padding = ($(window).height() - $('#card').height()) / 2;
+	
+	if (padding > 0) {
+		$('#container').css('padding-top', padding + 'px');
+	}
+}
+
 $(function() {
-	//ce.init($('#card .front'));
+	centerCard();
+	$(window).on('resize', centerCard);
 	$('#reverse').click(function() {
-		//ce.unwatch();
 		$('#card').addClass('flip');
 	});
 	$('.back').click(function() {
-		//ce.watch();
 		$('#card').removeClass('flip');
 	});
 });
