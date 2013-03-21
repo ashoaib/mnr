@@ -19,6 +19,8 @@ var card = {
 		card.addListener('header span', 'click', card.showFront);
 		card.addListener('#reverse span', 'click', card.showReverse);
 		card.addListener('nav li', 'click', card.setNav);
+		
+		card.cycle.init();
 	},
 	
 	showFront: function() {
@@ -38,8 +40,12 @@ var card = {
 	},
 	
 	setNav: function(e) {
+		var _this = $(this);
+		var slide = _this.data('slide');
+		
 		card.links.removeClass('active');
-		$(this).addClass('active');
+		_this.addClass('active');
+		card.cycle.goToSlide(slide);
 	},
 	
 	addListener: function(object, eventType, func) {
@@ -64,6 +70,21 @@ var card = {
 		for (o in card.listeners) {
 			$(o).off(card.listeners[o][0]);
 		}
+	}
+};
+
+card.cycle = {
+	init: function() {
+		card.cycle.slides = $('#slides');
+		card.cycle.slides.cycle({
+			fx: "fade",
+			timeout: 0,
+			speed: 500
+		});
+	},
+	
+	goToSlide: function(slide) {
+		card.cycle.slides.cycle(slide);
 	}
 };
 
